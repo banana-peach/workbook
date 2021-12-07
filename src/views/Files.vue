@@ -35,12 +35,15 @@ export default {
       for (let i = 0; i < byteString.length; i++) {
         intArray[i] = byteString.charCodeAt(i); // String.charCodeAt 将UTF-8字符转变为ASCII格式, 一个一个字符改
       }
-      console.log(intArray);
+      // console.log(intArray);
       return new Blob([intArray], { type: mimeString });
     },
     clickMe() {
       const canvas = document.getElementById("myCanvas");
       const url = canvas.toDataURL("image/png");
+      console.log(this.dataURItoBlob(url));
+      const newBlob = this.dataURItoBlob(url).slice(0,100, 'part')
+      console.log(newBlob);
       const img = window.URL.createObjectURL(this.dataURItoBlob(url));
       const a = document.getElementById("h");
       a.download = "helloWorld.png";
@@ -58,7 +61,7 @@ export default {
       } // 生成 [121, 111, 117, 43, 44]
       for (let n = 0; n < char.length; n++) {
         dataString += String.fromCharCode(char[n]); // String.fromCharCode 将ASCII字符转变UTF-16,  一个一个数字改
-      } // 转换成 "you+,"
+      } // 转换成  you+,
       console.log(dataString);
     }
   }
