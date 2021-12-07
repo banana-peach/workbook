@@ -1,0 +1,71 @@
+<template>
+  <div>
+    <div>文件二进制处理</div>
+    <a id="h">点此进行下载</a>
+    <canvas id="myCanvas" width="200" height="100"
+            style="border:2px solid #333333;background: pink">
+    </canvas>
+    <button @click="clickMe">按钮</button>
+    <button @click="change">change</button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Files",
+  mounted() {
+    /*
+    * canvas画图
+    * */
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+    ctx.stroke();
+  },
+  methods: {
+    /**
+     * base64  to blob二进制
+     */
+    dataURItoBlob(dataURI) {
+      var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0]; // mime类型
+      var byteString = atob(dataURI.split(",")[1]); // base64 解码
+      var arrayBuffer = new ArrayBuffer(byteString.length); // 创建缓冲数组
+      var intArray = new Uint8Array(arrayBuffer); // 新建一个8位的整数类型数组，用来存放ASCII编码的字符串
+      for (var i = 0; i < byteString.length; i++) {
+        intArray[i] = byteString.charCodeAt(i);
+        // console.log(byteString.charCodeAt(i));
+      }
+      console.log(intArray);
+      return new Blob([intArray], { type: mimeString });
+    },
+    clickMe() {
+      var canvas = document.getElementById("myCanvas");
+      const url = canvas.toDataURL("image/png");
+      const img = window.URL.createObjectURL(this.dataURItoBlob(url));
+      var a = document.getElementById("h");
+      a.download = "helloWorld.png";
+      a.href = img;
+    },
+    change() {
+      // ASCII码转字符串
+      // [121, 111, 117] => you
+      let dataString = "";
+      const str = [121, 111, 117, 43, 44];
+      const buff = new ArrayBuffer(str.length);
+      const char = new Uint8Array(buff);
+      for (var i = 0; i < buff.byteLength; i++) {
+        char[i] = str[i];
+      }
+      for (let n = 0; n < char.length; n++) {
+        dataString += String.fromCharCode(char[n]);
+      }
+      console.log(dataString);
+    }
+  }
+};
+</script>
+
+<style scoped>
+
+</style>
