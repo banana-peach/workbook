@@ -28,21 +28,21 @@ export default {
      * base64  to blob二进制
      */
     dataURItoBlob(dataURI) {
-      var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0]; // mime类型
-      var byteString = atob(dataURI.split(",")[1]); // base64 解码
-      var arrayBuffer = new ArrayBuffer(byteString.length); // 创建缓冲数组
-      var intArray = new Uint8Array(arrayBuffer); // 新建一个8位的整数类型数组，用来存放ASCII编码的字符串
-      for (var i = 0; i < byteString.length; i++) {
+      const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0]; // mime类型
+      const byteString = atob(dataURI.split(",")[1]); // base64 解码
+      const arrayBuffer = new ArrayBuffer(byteString.length); // 创建缓冲数组
+      const intArray = new Uint8Array(arrayBuffer); // 新建一个8位的整数类型数组，用来存放ASCII编码的字符串
+      for (let i = 0; i < byteString.length; i++) {
         intArray[i] = byteString.charCodeAt(i); // String.charCodeAt 将UTF-8字符转变为ASCII格式, 一个一个字符改
       }
       console.log(intArray);
       return new Blob([intArray], { type: mimeString });
     },
     clickMe() {
-      var canvas = document.getElementById("myCanvas");
+      const canvas = document.getElementById("myCanvas");
       const url = canvas.toDataURL("image/png");
       const img = window.URL.createObjectURL(this.dataURItoBlob(url));
-      var a = document.getElementById("h");
+      const a = document.getElementById("h");
       a.download = "helloWorld.png";
       a.href = img;
     },
@@ -51,14 +51,14 @@ export default {
       // [121, 111, 117] => you
       let dataString = "";
       const str = [121, 111, 117, 43, 44];
-      const buff = new ArrayBuffer(str.length);
+      const buff = new ArrayBuffer(str.length); // 生成 [0, 0, 0, 0]
       const char = new Uint8Array(buff);
-      for (var i = 0; i < buff.byteLength; i++) {
+      for (let i = 0; i < buff.byteLength; i++) {
         char[i] = str[i];
-      }
+      } // 生成 [121, 111, 117, 43, 44]
       for (let n = 0; n < char.length; n++) {
         dataString += String.fromCharCode(char[n]); // String.fromCharCode 将ASCII字符转变UTF-16,  一个一个数字改
-      }
+      } // 转换成 "you+,"
       console.log(dataString);
     }
   }
