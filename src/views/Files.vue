@@ -33,8 +33,7 @@ export default {
       var arrayBuffer = new ArrayBuffer(byteString.length); // 创建缓冲数组
       var intArray = new Uint8Array(arrayBuffer); // 新建一个8位的整数类型数组，用来存放ASCII编码的字符串
       for (var i = 0; i < byteString.length; i++) {
-        intArray[i] = byteString.charCodeAt(i);
-        // console.log(byteString.charCodeAt(i));
+        intArray[i] = byteString.charCodeAt(i); // String.charCodeAt 将UTF-8字符转变为ASCII格式, 一个一个字符改
       }
       console.log(intArray);
       return new Blob([intArray], { type: mimeString });
@@ -58,7 +57,7 @@ export default {
         char[i] = str[i];
       }
       for (let n = 0; n < char.length; n++) {
-        dataString += String.fromCharCode(char[n]);
+        dataString += String.fromCharCode(char[n]); // String.fromCharCode 将ASCII字符转变UTF-16,  一个一个数字改
       }
       console.log(dataString);
     }
