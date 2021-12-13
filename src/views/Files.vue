@@ -7,12 +7,18 @@
     </canvas>
     <button @click="clickMe">按钮</button>
     <button @click="change">change</button>
+    {{ byteLength }}
   </div>
 </template>
 
 <script>
 export default {
   name: "Files",
+  data() {
+    return {
+      byteLength: 0
+    };
+  },
   mounted() {
     /*
     * canvas画图
@@ -22,6 +28,19 @@ export default {
     ctx.beginPath();
     ctx.arc(95, 50, 40, 0, 2 * Math.PI);
     ctx.stroke();
+
+    // 获取字符串字节长度
+    // eslint-disable-next-line no-extend-native
+    String.prototype.byteLength = function () {
+      let count = 0;
+      for (let i = 0, l = this.length; i < l; i++) {
+        count += this.charCodeAt(i) <= 128 ? 1 : 2;
+      }
+      return count;
+    };
+    const str = ""
+    console.log(str.byteLength());
+    this.byteLength = str.byteLength();
   },
   methods: {
     /**
@@ -42,7 +61,8 @@ export default {
       const canvas = document.getElementById("myCanvas");
       const url = canvas.toDataURL("image/png");
       console.log(this.dataURItoBlob(url));
-      const newBlob = this.dataURItoBlob(url).slice(0,100, 'part')
+      const newBlob = this.dataURItoBlob(url)
+        .slice(0, 100, "part");
       console.log(newBlob);
       const img = window.URL.createObjectURL(this.dataURItoBlob(url));
       const a = document.getElementById("h");
@@ -63,7 +83,8 @@ export default {
         dataString += String.fromCharCode(char[n]); // String.fromCharCode 将ASCII字符转变UTF-16,  一个一个数字改
       } // 转换成  you+,
       console.log(dataString);
-    }
+    },
+
   }
 };
 </script>
