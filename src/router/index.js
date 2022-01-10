@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "../views/Home.vue";
+// import Home from "../views/Home.vue";
 import Files from "../views/Files.vue";
 import Record from "../views/Record.vue";
 import Change from "../views/Change.vue";
@@ -7,8 +7,8 @@ import Change from "../views/Change.vue";
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "Change",
+    component: Change,
   },
   {
     path: "/files",
