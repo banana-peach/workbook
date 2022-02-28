@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Files from "../views/Files.vue";
 import Record from "../views/Record.vue";
 import Change from "../views/Change.vue";
+import Position from "../views/Position.vue";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/change",
     name: "Change",
     component: Change,
+  },
+  {
+    path: "/position",
+    name: "Position",
+    component: Position,
   },
 ];
 
