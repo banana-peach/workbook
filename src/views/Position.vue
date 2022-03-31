@@ -2,6 +2,10 @@
   <div class="items">
     <div class="item">1</div>
     <div class="item">2</div>
+    <div class="item">11</div>
+    <div class="item">12</div>
+    <div class="item">21</div>
+    <div class="item">22</div>
   </div>
 </template>
 
