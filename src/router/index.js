@@ -4,6 +4,7 @@ import Files from "../views/Files.vue";
 import Record from "../views/Record.vue";
 import Change from "../views/Change.vue";
 import Position from "../views/Position.vue";
+import Directive from "../views/Directive";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: "/position",
     name: "Position",
     component: Position,
+  },
+  {
+    path: "/directive",
+    name: "Directive",
+    component: Directive,
   },
 ];
 
