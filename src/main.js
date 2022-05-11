@@ -5,8 +5,12 @@ import router from './router';
 import store from './store';
 import 'vant/lib/index.css';
 
-createApp(App)
+const G2 = require('@antv/g2')
+
+const vue = createApp(App)
   .use(store)
   .use(Vant)
   .use(router)
   .mount('#app');
+
+// vue.prototype.$G2 = G2

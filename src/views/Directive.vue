@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div v-resize></div>
+    <input v-focus type="text" name="">
   </div>
 </template>
 
@@ -11,19 +12,37 @@ export default {
   directives: {
     resize: {
       mounted() {
-        console.log("bind")
+        console.log("bind");
       },
       inserted() {
-        console.log("inserted")
+        console.log("inserted");
       },
       update() {
-        console.log("update")
+        console.log("update");
       },
       componentUpdated() {
-        console.log("componentUpdated")
+        console.log("componentUpdated");
       },
       unbind() {
-        console.log("unbind")
+        console.log("unbind");
+      },
+    },
+    focus: {
+      mounted(el) {
+        el.focus();
+        console.log("bind");
+      },
+      inserted() {
+        console.log("inserted");
+      },
+      update() {
+        console.log("update");
+      },
+      componentUpdated() {
+        console.log("componentUpdated");
+      },
+      unbind() {
+        console.log("unbind");
       },
     },
   },

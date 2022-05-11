@@ -5,6 +5,7 @@ import Record from "../views/Record.vue";
 import Change from "../views/Change.vue";
 import Position from "../views/Position.vue";
 import Directive from "../views/Directive";
+import Chart from "../views/Chart";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: "/directive",
     name: "Directive",
     component: Directive,
+  },
+  {
+    path: "/chart",
+    name: "Chart",
+    component: Chart,
   },
 ];
 
