@@ -1,16 +1,19 @@
-import { createApp } from 'vue';
-import Vant from 'vant';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import 'vant/lib/index.css';
+// eslint-disable-next-line no-unused-vars
+import { createApp, reactive } from "vue";
+import Vant from "vant";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import "vant/lib/index.css";
 
-const G2 = require('@antv/g2')
+const sourceOfTruth = reactive({
+  message: "Hello"
+});
+console.log(sourceOfTruth);
 
-const vue = createApp(App)
+createApp(App)
   .use(store)
   .use(Vant)
   .use(router)
-  .mount('#app');
-
-// vue.prototype.$G2 = G2
+  // .use(VueVideoPlayer)
+  .mount("#app");

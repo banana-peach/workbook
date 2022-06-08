@@ -4,14 +4,12 @@ import Qs from "qs";
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  baseURL: "http://127.0.0.1/tp5/public/", // url = base url + request url
   timeout: 60000,
-  withCredentials: true,
-  // eslint-disable-next-line func-names
-  transformRequest: [function(data) {
+  withCredentials: false,
+  transformRequest: [function (data) {
     return Qs.stringify(data); // 使用Qs将请求参数序列化
   }],
-  // 设置请求头
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
   }
@@ -20,12 +18,9 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   (config) => {
-    // do something before request is sent
     return config;
   },
   (error) => {
-    // do something with request error
-    // eslint-disable-next-line no-console
     console.log(error); // for debug
     return Promise.reject(error);
   },
@@ -39,25 +34,14 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   (response) => {
-    // const res = response;
-    // console.log(res);
-
-    // if the custom code is not 20000, it is judged as an error.
-    // if (response.code !== 200) {
-    // console.log(response);
     if (response.data.code !== 200) {
-      // alert(response.data.message || "Error");
-      // return Promise.reject(new Error(res.message || 'Error'))
       return response.data;
-      // return Promise.reject("失败");
     } else {
       return response.data;
     }
   },
   (error) => {
-    // eslint-disable-next-line no-console
     console.log(`err${error}`); // for debug
-    // alert("服务器内部错误, 请联系开发人员. 错误提示:" + error);
     return Promise.reject(error);
   }
 );

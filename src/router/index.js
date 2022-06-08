@@ -6,6 +6,10 @@ import Change from "../views/Change.vue";
 import Position from "../views/Position.vue";
 import Directive from "../views/Directive";
 import Chart from "../views/Chart";
+import Video from "../views/Video";
+import Video2 from "../views/Video2";
+import Player from "../views/Player";
+import Upload from "../views/Upload";
 
 const routes = [
   {
@@ -42,6 +46,26 @@ const routes = [
     path: "/chart",
     name: "Chart",
     component: Chart,
+  },
+  {
+    path: "/video",
+    name: "Video",
+    component: Video,
+  },
+  {
+    path: "/video2",
+    name: "Video2",
+    component: Video2,
+  },
+  {
+    path: "/player",
+    name: "Player",
+    component: Player,
+  },
+  {
+    path: "/upload",
+    name: "Upload",
+    component: Upload,
   },
 ];
 
