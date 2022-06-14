@@ -8,8 +8,10 @@ import Directive from "../views/Directive";
 import Chart from "../views/Chart";
 import Video from "../views/Video";
 import Video2 from "../views/Video2";
+import Table from "../views/Table";
 import Player from "../views/Player";
 import Upload from "../views/Upload";
+import Wechat from "../views/Wechat";
 
 const routes = [
   {
@@ -51,6 +53,16 @@ const routes = [
     path: "/video",
     name: "Video",
     component: Video,
+  },
+  {
+    path: "/table",
+    name: "Table",
+    component: Table,
+  },
+  {
+    path: "/chat",
+    name: "Wechat",
+    component: Wechat,
   },
   {
     path: "/video2",
