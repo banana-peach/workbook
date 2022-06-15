@@ -7,22 +7,44 @@
 <script>
 export default {
   name: "Wechat",
+  data() {
+    return {
+      ws: null
+    };
+  },
   mounted() {
-    const socket = new WebSocket("ws://localhost:9999");
+    // this.ws = new WebSocket("ws://192.168.3.21:9000");
+    this.WebSocketTest();
+  },
+  methods: {
+    WebSocketTest() {
+      if ("WebSocket" in window) {
+        // alert("您的浏览器支持 WebSocket!");
 
-    // Connection opened
-    socket.addEventListener("open", function (event) {
-      console.log("socket 打开");
-      socket.send("Hello Server!");
+        // 打开一个 web socket
+        var ws = new WebSocket("ws://192.168.3.21:3000");
 
-      socket.send("Hello server!");
+        ws.onopen = () => {
+          // Web Socket 已连接上，使用 send() 方法发送数据
+          ws.send("发送数据, 收到了吗");
+          console.log(("数据发送中..."));
+        };
 
-    });
+        ws.onmessage = function (evt) {
+          const received = evt.data;
+          console.log(received);
+          console.log(("数据已接收..."));
+        };
 
-    // Listen for messages
-    socket.addEventListener("message", function (event) {
-      console.log("Message from server ", event.data);
-    });
+        ws.onclose = function () {
+          // 关闭 websocket
+          console.log(("连接已关闭..."));
+        };
+      } else {
+        // 浏览器不支持 WebSocket
+        alert("您的浏览器不支持 WebSocket!");
+      }
+    }
   }
 };
 </script>
