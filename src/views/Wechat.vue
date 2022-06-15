@@ -1,6 +1,22 @@
 <template>
   <div>
-    <h2>在线微信聊天室</h2>
+    <h2>在线微信聊天室
+      <span @click="start">开启服务</span>
+    </h2>
+    <div>
+      <ul>
+        <li v-for="(item, index) in messageLists" :key="index">
+          发送人 {{ item.user }}, 消息<i>{{ item.text }}</i>>
+        </li>
+      </ul>
+    </div>
+    <span>用户名</span>
+    <input v-model="openInfo.user" type="text">
+
+    <span>信息</span>
+    <input v-model="message" type="text">
+    <button @click="sendText">点击发送</button>
+    <button @click="closeWeb">关闭服务</button>
   </div>
 </template>
 
@@ -9,41 +25,74 @@ export default {
   name: "Wechat",
   data() {
     return {
-      ws: null
+      socket: null,
+      message: "",
+      messageLists: [],
+      name: "",
+      openInfo: {
+        type: "info",
+        message: "连接成功",
+        user: name
+      },
+      closeInfo: {
+        type: "left",
+        message: "退出成功",
+        user: name
+      },
+      sendInfo: {
+        type: "message",
+        text: "",
+        user: name
+      },
+
     };
   },
   mounted() {
-    // this.ws = new WebSocket("ws://192.168.3.21:9000");
+    const name = Math.round(Math.random() * 100);
+    this.openInfo.user = name;
+    this.closeInfo.user = name;
+    this.sendInfo.user = name;
     this.WebSocketTest();
   },
   methods: {
+    closeWeb() {
+      this.socket.send(JSON.stringify(this.closeInfo));
+      this.socket.close();
+    },
+    start() {
+      this.WebSocketTest();
+    },
     WebSocketTest() {
-      if ("WebSocket" in window) {
-        // alert("您的浏览器支持 WebSocket!");
+      // 打开一个 web socket
+      this.socket = new WebSocket("ws://192.168.3.21:3000");
 
-        // 打开一个 web socket
-        var ws = new WebSocket("ws://192.168.3.21:3000");
+      this.socket.onopen = () => {
+        // Web Socket 已连接上，使用 send() 方法发送数据
+        this.socket.send(JSON.stringify(
+          this.openInfo
+        ));
+      };
 
-        ws.onopen = () => {
-          // Web Socket 已连接上，使用 send() 方法发送数据
-          ws.send("发送数据, 收到了吗");
-          console.log(("数据发送中..."));
-        };
+      this.socket.onmessage = (evt) => {
+        const received = evt.data;
+        console.log(`收到服务器的信息: ${received}`);
+        const data = JSON.parse(received);
+        switch (data.type) {
+          case "message":
+            console.log("走了之金额");
+            this.messageLists.push(data);
+            break;
+        }
+      };
 
-        ws.onmessage = function (evt) {
-          const received = evt.data;
-          console.log(received);
-          console.log(("数据已接收..."));
-        };
-
-        ws.onclose = function () {
-          // 关闭 websocket
-          console.log(("连接已关闭..."));
-        };
-      } else {
-        // 浏览器不支持 WebSocket
-        alert("您的浏览器不支持 WebSocket!");
-      }
+      this.socket.onclose = () => {
+        this.socket.send("客户端关闭");
+        console.log(("连接已关闭..."));
+      };
+    },
+    sendText() {
+      this.sendInfo.text = this.message;
+      this.socket.send(JSON.stringify(this.sendInfo));
     }
   }
 };
