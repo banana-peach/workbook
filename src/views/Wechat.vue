@@ -1,22 +1,31 @@
 <template>
   <div>
     <h2>在线微信聊天室
-      <span @click="start">开启服务</span>
     </h2>
-    <div>
-      <ul>
-        <li v-for="(item, index) in messageLists" :key="index">
-          发送人 {{ item.user }}, 消息<i>{{ item.text }}</i>>
-        </li>
-      </ul>
+    <div class="chat-container">
+      <div class="chat-message">
+        <div class="chat">
+          <ul>
+            <li v-for="(item, index) in messageLists" :key="index">
+              发送人 {{ item.user }}, 消息<b>{{ item.text }}</b>
+            </li>
+          </ul>
+        </div>
+        <div class="chat-option">
+          <span>待发送的信息</span>
+          <input v-model="message" type="text">
+          <button @click="sendText">点击发送</button>
+        </div>
+        <!--        <button @click="closeWeb">关闭服务</button>-->
+      </div>
+      <div class="chat-persons">
+        <ul class="chat-users">
+          <li v-for="(item, index) in userLists" :key="index" class="chat-user">
+            {{ item }}
+          </li>
+        </ul>
+      </div>
     </div>
-    <span>用户名</span>
-    <input v-model="openInfo.user" type="text">
-
-    <span>信息</span>
-    <input v-model="message" type="text">
-    <button @click="sendText">点击发送</button>
-    <button @click="closeWeb">关闭服务</button>
   </div>
 </template>
 
@@ -28,9 +37,10 @@ export default {
       socket: null,
       message: "",
       messageLists: [],
+      userLists: [],
       name: "",
       openInfo: {
-        type: "info",
+        type: "login",
         message: "连接成功",
         user: name
       },
@@ -53,14 +63,16 @@ export default {
     this.closeInfo.user = name;
     this.sendInfo.user = name;
     this.WebSocketTest();
+
+    window.addEventListener("unload", () => {
+      // console.log("unload");
+      this.closeWeb();
+    });
   },
   methods: {
     closeWeb() {
       this.socket.send(JSON.stringify(this.closeInfo));
       this.socket.close();
-    },
-    start() {
-      this.WebSocketTest();
     },
     WebSocketTest() {
       // 打开一个 web socket
@@ -79,9 +91,19 @@ export default {
         const data = JSON.parse(received);
         switch (data.type) {
           case "message":
-            console.log("走了之金额");
             this.messageLists.push(data);
             break;
+          case "left":
+            // 有人离开了
+            // console.log(data);
+            this.userLists = data.users;
+            // this.userLists.splice(this.userLists.indexOf(data.user), 1);
+            break;
+          case "login":
+            this.userLists = data.users;
+            // console.log(this.userLists);
+            break;
+
         }
       };
 
@@ -98,6 +120,41 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.chat-container {
+  display: flex;
 
+}
+
+.chat-message {
+  width: 500px;
+}
+
+.chat-persons {
+  cursor: pointer;
+  margin-left: 20px;
+  .chat-user {
+    width: 100px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    border: #333 solid 1px;
+    margin-top: 2px;
+  }
+  .chat-user:hover {
+    border-color: aqua;
+    color: black;
+    font-weight: 700;
+  }
+}
+
+.chat {
+  height: 500px;
+  overflow: auto;
+  margin-left: 20px;
+  padding-top: 20px;
+}
+.chat-option {
+  padding-top: 20px;
+}
 </style>
