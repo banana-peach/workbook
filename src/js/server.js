@@ -63,10 +63,7 @@ server.on("connection", function(ws) {
           }
         );
         break;
-
     }
-    // server.broadcast(data);
-    // console.log(`[SERVER] Received: ${message}`);
   });
 
 });

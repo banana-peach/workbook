@@ -12,6 +12,8 @@ import Table from "../views/Table";
 import Player from "../views/Player";
 import Upload from "../views/Upload";
 import Wechat from "../views/Wechat";
+import Wechat2 from "../views/Wechat2";
+import IndexedDb from "../views/IndexedDb";
 
 const routes = [
   {
@@ -33,6 +35,11 @@ const routes = [
     path: "/change",
     name: "Change",
     component: Change,
+  },
+  {
+    path: "/db",
+    name: "IndexedDb",
+    component: IndexedDb,
   },
   {
     path: "/position",
@@ -63,6 +70,11 @@ const routes = [
     path: "/chat",
     name: "Wechat",
     component: Wechat,
+  },
+  {
+    path: "/chat2",
+    name: "Wechat2",
+    component: Wechat2,
   },
   {
     path: "/video2",

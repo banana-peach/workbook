@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>在线微信聊天室
+    <h2>测试医生端
     </h2>
     <div class="chat-container">
       <div class="chat-message">
@@ -64,6 +64,7 @@ export default {
     this.sendInfo.user = name;
     this.WebSocketTest();
 
+
     window.addEventListener("unload", () => {
       // console.log("unload");
       this.closeWeb();
@@ -75,13 +76,17 @@ export default {
       this.socket.close();
     },
     WebSocketTest() {
+      console.log("打开socket");
       // 打开一个 web socket
-      this.socket = new WebSocket("ws://192.168.3.21:3000/room1");
-
+      this.socket = new WebSocket("ws://192.168.3.27:6001");
+      console.log(this.socket);
       this.socket.onopen = () => {
         // Web Socket 已连接上，使用 send() 方法发送数据
         this.socket.send(JSON.stringify(
-          this.openInfo
+          {
+            type: "left",
+            part: "doctorSide", // doctorSide 医生端, nurseIndex 护士首页, nurseRegister 护士排号
+          }
         ));
       };
 
@@ -133,6 +138,7 @@ export default {
 .chat-persons {
   cursor: pointer;
   margin-left: 20px;
+
   .chat-user {
     width: 100px;
     text-align: center;
@@ -141,6 +147,7 @@ export default {
     border: #333 solid 1px;
     margin-top: 2px;
   }
+
   .chat-user:hover {
     border-color: aqua;
     color: black;
@@ -154,6 +161,7 @@ export default {
   margin-left: 20px;
   padding-top: 20px;
 }
+
 .chat-option {
   padding-top: 20px;
 }
