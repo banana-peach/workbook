@@ -14,6 +14,7 @@ import Upload from "../views/Upload";
 import Wechat from "../views/Wechat";
 import Wechat2 from "../views/Wechat2";
 import IndexedDb from "../views/IndexedDb";
+import Svg from "../views/Svg";
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: "/files",
     name: "Files",
     component: Files,
+  },
+  {
+    path: "/svg",
+    name: "Svg",
+    component: Svg,
   },
   {
     path: "/record",

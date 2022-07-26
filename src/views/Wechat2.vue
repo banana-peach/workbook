@@ -78,7 +78,7 @@ export default {
     WebSocketTest() {
       console.log("打开socket");
       // 打开一个 web socket
-      this.socket = new WebSocket("ws://192.168.3.27:6001");
+      this.socket = new WebSocket("ws://192.168.3.11:6001");
       console.log(this.socket);
       this.socket.onopen = () => {
         // Web Socket 已连接上，使用 send() 方法发送数据
