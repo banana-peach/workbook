@@ -4,10 +4,10 @@
       <defs>
         <g id="leftalign">
           <!-- Left align icon made with lines -->
-          <line x1="3" y1="3" x2="48" y2="3"></line>
-          <line x1="3" y1="19" x2="65" y2="19"></line>
-          <line x1="3" y1="35" x2="48" y2="35"></line>
-          <line x1="3" y1="51" x2="65" y2="51"></line>
+          <line x1="3" y1="3" x2="48" y2="3" />
+          <line x1="3" y1="19" x2="65" y2="19" />
+          <line x1="3" y1="35" x2="48" y2="35" />
+          <line x1="3" y1="51" x2="65" y2="51" />
         </g>
 
         <g id="rightcaret">
@@ -16,19 +16,19 @@
             3 3
             30 28
             3 53
-          "></polyline>
+          " />
         </g>
 
         <g id="browser">
           <!-- Browser icon made with rectangle and lines -->
-          <rect x="3" y="3" width="80" height="60"></rect>
-          <line x1="3" y1="19" x2="83" y2="19"></line>
-          <line x1="20" y1="3" x2="20" y2="17"></line>
+          <rect x="3" y="3" width="80" height="60" />
+          <line x1="3" y1="19" x2="83" y2="19" />
+          <line x1="20" y1="3" x2="20" y2="17" />
         </g>
       </defs>
-      <use href="#leftalign" x="100" y="100"></use>
-      <use href="#rightcaret" x="300" y="100"></use>
-      <use href="#browser" x="500" y="100"></use>
+      <use href="#leftalign" x="100" y="100" />
+      <use href="#rightcaret" x="300" y="100" />
+      <use href="#browser" x="500" y="100" />
     </svg>
   </div>
 </template>

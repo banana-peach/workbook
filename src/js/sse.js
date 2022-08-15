@@ -112,7 +112,7 @@ app.get("/streaming", (req, res) => {
       return;
     }
     res.write(`data: ${JSON.stringify({ num: counter })}\n\n`); // res.write() instead of res.send()
-    res.write("event: 222\n" + "data: " + JSON.stringify({num: counter}) + "\n\n");
+    res.write("event: 222\n" + "data: " + JSON.stringify({ num: counter }) + "\n\n");
   }, 1000);
 
   // If client closes connection, stop sending events
@@ -126,6 +126,10 @@ app.get("/streaming", (req, res) => {
 // example: http://localhost:3600/api/users/?api-key=foo
 app.get("/api/users", function (req, res, next) {
   res.send(users);
+});
+
+app.use("/test", function (req, res, next) {
+  res.send("ok");
 });
 
 // example: http://localhost:3600/api/repos/?api-key=foo

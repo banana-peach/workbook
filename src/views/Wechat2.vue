@@ -64,7 +64,6 @@ export default {
     this.sendInfo.user = name;
     this.WebSocketTest();
 
-
     window.addEventListener("unload", () => {
       // console.log("unload");
       this.closeWeb();
@@ -108,7 +107,6 @@ export default {
             this.userLists = data.users;
             // console.log(this.userLists);
             break;
-
         }
       };
 
