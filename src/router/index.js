@@ -15,6 +15,8 @@ import Wechat from "../views/Wechat";
 import Wechat2 from "../views/Wechat2";
 import IndexedDb from "../views/IndexedDb";
 import Svg from "../views/Svg";
+import WebRtc from "../views/WebRtc";
+import Rtc from "../views/Rtc2";
 
 const routes = [
   {
@@ -27,6 +29,16 @@ const routes = [
     name: "Files",
     component: Files,
   },
+  {
+    path: "/rtc",
+    name: "WebRtc",
+    component: WebRtc,
+  },
+  {
+    path: "/rtc2",
+    name: "WebRtc2",
+    component: Rtc,
+  }, ,
   {
     path: "/svg",
     name: "Svg",
